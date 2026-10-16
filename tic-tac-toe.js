@@ -8,11 +8,16 @@ window.onload = function () {
 document.addEventListener("DOMContentLoaded", function () {
     const squares = document.querySelectorAll("#board div");
     const status = document.getElementById("status");
-    // Tracks the state of the game: 9 slots, one per square
-    const gameState = new Array(9).fill(null);
+    const newGameButton = document.querySelector(".btn");
 
+    // Save the original status message so we can restore it on reset
+    const originalStatusMessage = status.textContent;
+
+    // Tracks the state of the game: 9 slots, one per square
+    let gameState = new Array(9).fill(null);
     // X always goes first
     let currentPlayer = "X";
+    let gameOver = false;
     const winningLines = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],   // rows
         [0, 3, 6], [1, 4, 7], [2, 5, 8],   // columns
@@ -73,4 +78,22 @@ document.addEventListener("DOMContentLoaded", function () {
             squares[i].classList.remove("hover");
         });
     }
+
+    newGameButton.addEventListener("click", function () {
+        // Clear the game state and start with X again
+        gameState = new Array(9).fill(null);
+        currentPlayer = "X";
+        gameOver = false;
+
+        // Remove the X/O marks and their classes from every square
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].textContent = "";
+            squares[i].classList.remove("X");
+            squares[i].classList.remove("O");
+        }
+
+        // Restore the original status message and remove the winner style
+        status.textContent = originalStatusMessage;
+        status.classList.remove("you-won");
+    });
 });
