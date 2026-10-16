@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const b = winningLines[i][1];
             const c = winningLines[i][2];
 
+            // Excerise 6 is checked here
             if (gameState[a] !== null &&
                 gameState[a] === gameState[b] &&
                 gameState[a] === gameState[c]) {
