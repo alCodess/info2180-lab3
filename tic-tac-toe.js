@@ -33,5 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Switch turns
             currentPlayer = (currentPlayer === "X") ? "O" : "X";
         });
+
+        // Exercise 3: hover effect
+        squares[i].addEventListener("mouseover", function () {
+            squares[i].classList.add("hover");
+        });
+
+        squares[i].addEventListener("mouseout", function () {
+            squares[i].classList.remove("hover");
+        });
     }
 });
